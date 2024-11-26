@@ -7,7 +7,7 @@ const [name, setName] = useState("");
 const handleConfirm = () => {
     alert(`Tack för din bokning!`);
    
-    <Link to="/bokning">Bokning</Link>
+    <Link to="/boka">Bokning</Link>
 
 };
 

@@ -19,7 +19,10 @@ function App() {
 }
 
 export default App;
- /*<Route>
- <Route path="/boka" element={<Boka />}></Route>
+ /*<Router>
 
-    </Route>*/
+   <Route>
+ <Route path="/boka" element={<Boka/>}></Route>
+
+    </Route>
+   </Router>*/

@@ -1,11 +1,30 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import "./style.css";
-import { Link } from "react-router-dom";
 
 
 function Booking () {
     const [selectedRoom, setSelectedRoom] = useState("");
     const [selectedTime, setSelectedTime] = useState(null);
+    const [bookings, setBookings] = useState([]);
+
+
+    useEffect(() => {
+        fetch(`https://localhost:7195/booking/rooms`)
+            .then(response => response.json())
+            .then(data => {
+                setBookings(data);
+               
+            })
+            .catch(err => {
+                console.error(err);
+               
+            });
+    }, );
+
+
+
+
+
 
 
 
@@ -45,14 +64,21 @@ return (
     <div className="container">
         
         <h1>Välj en tid</h1>
-        
+       
+        <div>
+            {bookings.map(booking => (
+                <div key={booking.id}>
+                    <p><strong>{booking.name}</strong>: {booking.capacity} personer</p>
+                </div>
+            ))}
+        </div>
         <select onChange={handleRoomChange}
         value={selectedRoom}>
             <option value="">Mötesrum</option>
-            {rooms.map((room, index) => (
-                <option key={room.date} 
-                value={room.details[0]?.name}>
-                    {room.details[0]?.name} ({room.capacity || 0} personer)
+            {bookings.map(booking => (
+                <option key={booking.id} 
+                value={booking.name}>
+                    {booking.name} ({booking.capacity || 0} personer)
 
                     
 
@@ -81,7 +107,7 @@ return (
                         {rooms.map((room,colIndex) => ( 
                             <td key={colIndex}>
                                 {room.times[rowIndex] ? (
-                                    <button className="time-slot" onClick={() => handleTimeSelect(` ${room.date} ${room.times[rowIndex]}`)}>
+                                    <button className="time-slot" onClick={() => handleTimeSelect(`  ${room.date} ${room.times[rowIndex]}`)}>
                                         {room.times[rowIndex]}
                                     </button>
                                 ) : ( 
