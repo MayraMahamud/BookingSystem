@@ -64,14 +64,6 @@ return (
     <div className="container">
         
         <h1>Välj en tid</h1>
-       
-        <div>
-            {bookings.map(booking => (
-                <div key={booking.id}>
-                    <p><strong>{booking.name}</strong>: {booking.capacity} personer</p>
-                </div>
-            ))}
-        </div>
         <select onChange={handleRoomChange}
         value={selectedRoom}>
             <option value="">Mötesrum</option>
